@@ -62,7 +62,7 @@ def format_docs(docs):
 
 
 @st.cache_data(show_spinner="Embedding file...")
-def embed_file(file):
+def embed_file(file, api_key):
     file_content = file.read()
     file_path = f"./.cache/files/{file.name}"
     with open(file_path, "wb") as f:
@@ -75,7 +75,7 @@ def embed_file(file):
     )
     loader = UnstructuredFileLoader(file_path)
     docs = loader.load_and_split(text_splitter=splitter)
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
     cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
         embeddings, 
         cache_dir,
@@ -155,7 +155,7 @@ if file:
         openai_api_key=api_key,
     )
 
-    retriever = embed_file(file)
+    retriever = embed_file(file, api_key)
 
     send_message("I'm ready! Ask away!", "ai", save=False)
     print_history()
