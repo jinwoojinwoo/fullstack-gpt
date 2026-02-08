@@ -215,7 +215,6 @@ if not docs:
     )
 else:
     response = run_quiz_chain(docs, topic if topic else file.name, api_key, difficulty)
-    st.write(response)
     with st.form("questions_form"):
         all_correct = True
         for question in response["questions"]:
