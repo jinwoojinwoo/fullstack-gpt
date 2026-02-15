@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from langchain_community.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
